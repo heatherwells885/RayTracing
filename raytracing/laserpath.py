@@ -101,7 +101,7 @@ class LaserPath(MatrixGroup):
         axes.set(xlabel='Distance', ylabel='Height', title=self.label)
         axes.set_ylim([-displayRange / 2 * 1.2, displayRange / 2 * 1.2])
 
-        self.drawAt(z=0, axes=axes)
+        self.drawAt(z=0, axes=axes, showLabels=self.showElementLabels)
 
         for beam in beams:
             self.drawBeamTrace(axes, beam)
