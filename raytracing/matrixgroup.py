@@ -193,9 +193,19 @@ class MatrixGroup(Matrix):
                     labels[zStr] = label
             zElement += element.L
 
+        listOfZ=[-1000]
+        idxLens=-0.5
         halfHeight = self.largestDiameter()/2
         for zStr, label in labels.items():
+            idxLens+=0.5
+            verticalSpace=0
             z = float(zStr)
-            axes.annotate(label, xy=(z, 0.0), xytext=(z, -halfHeight * 0.5),
+            for idx in listOfZ:
+                if z>=(idx-0.2*axes.get_xlim()[1]) and z<=(idx+0.2*axes.get_xlim()[1]):
+                    verticalSpace-=halfHeight/2.5
+                else:
+                    pass
+            listOfZ.append(z)
+            axes.annotate("$L_"+str(int(floor(idxLens)))+"$"+label, xy=(z, 0.0), xytext=(z, -halfHeight/2+verticalSpace),
                          xycoords='data', fontsize=12,
                          ha='center', va='bottom')
