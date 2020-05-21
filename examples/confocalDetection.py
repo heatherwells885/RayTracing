@@ -1,5 +1,9 @@
 from raytracing import *
 import matplotlib.pyplot as plt
+'''
+To obtain and plot the intensity of a point source at the pinhole of a confocal microscope (with variable pinhole size) as a function of position of focal spot by sending a large number of rays in the system. (Changing the position of the focal spot provides an optical sectioning process.)
+
+'''
 
 pinholeModifier = {1/3:[], 1:[], 3:[]}
 
