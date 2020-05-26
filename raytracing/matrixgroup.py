@@ -6,6 +6,7 @@ import matplotlib.patches as patches
 import matplotlib.path as mpath
 import matplotlib.transforms as transforms
 
+
 class MatrixGroup(Matrix):
     """MatrixGroup: A group of Matrix(), allowing
     the combination of several elements to be treated as a 
@@ -13,7 +14,7 @@ class MatrixGroup(Matrix):
     """
 
     def __init__(self, elements=None, label=""):
-        super(MatrixGroup, self).__init__(1,0,0,1,label=label)
+        super(MatrixGroup, self).__init__(1, 0, 0, 1, label=label)
 
         self.elements = []
 
@@ -141,7 +142,7 @@ class MatrixGroup(Matrix):
     def largestDiameter(self):
         """ Largest finite diameter in all elements """
 
-        maxDiameter = 0.0
+        maxDiameter = 0
         if self.hasFiniteApertureDiameter():
             for element in self.elements:
                 diameter = element.largestDiameter()
@@ -149,6 +150,8 @@ class MatrixGroup(Matrix):
                     maxDiameter = diameter
         elif len(self.elements) != 0:
             maxDiameter = self.elements[0].displayHalfHeight() * 2
+        else:
+            maxDiameter = float("+inf")
 
         return maxDiameter
 
@@ -166,7 +169,7 @@ class MatrixGroup(Matrix):
 
         return self
 
-    def drawAt(self, z, axes, showLabels=True):
+    def drawAt(self, z, axes, showLabels=True):  # pragma: no cover
         """ Draw each element of this group """
         for element in self.elements:
             element.drawAt(z, axes)
@@ -176,7 +179,7 @@ class MatrixGroup(Matrix):
                 element.drawLabels(z, axes)
             z += element.L
 
-    def drawPointsOfInterest(self, z, axes):
+    def drawPointsOfInterest(self, z, axes):  # pragma: no cover
         """
         Labels of general points of interest are drawn below the
         axis, at 25% of the largest diameter.
@@ -195,7 +198,6 @@ class MatrixGroup(Matrix):
             else:
                 labels[zStr] = label
 
-
         # Points of interest for each element
         for element in self.elements:
             pointsOfInterest = element.pointsOfInterest(zElement)
@@ -209,9 +211,9 @@ class MatrixGroup(Matrix):
                     labels[zStr] = label
             zElement += element.L
 
-        halfHeight = self.largestDiameter()/2
+        halfHeight = self.largestDiameter() / 2
         for zStr, label in labels.items():
             z = float(zStr)
             axes.annotate(label, xy=(z, 0.0), xytext=(z, -halfHeight * 0.5),
-                         xycoords='data', fontsize=12,
-                         ha='center', va='bottom')
+                          xycoords='data', fontsize=12,
+                          ha='center', va='bottom')

@@ -10,6 +10,11 @@ import base64
 import re
 import os
 
+from .specialtylenses import *
+from .axicon import *
+from . import thorlabs
+from . import eo
+from . import olympus
 
 ap = argparse.ArgumentParser(prog='python -m raytracing')
 ap.add_argument("-e", "--examples", required=False, default='', help="Specific example numbers, separated by a comma")
